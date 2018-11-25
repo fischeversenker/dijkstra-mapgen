@@ -1,20 +1,41 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<h2>Map Generator</h2>
 
+<div class='form'>
+  <div class='form__control'>
+    <label>
+      Width
+      <input min='2' max='20' type="number" [(ngModel)]='mapSize.width'>
+    </label>
+  </div>
+
+  <div class='form__control'>
+    <label>
+      Height
+      <input min='2' max='20' type="number" [(ngModel)]='mapSize.height'>
+    </label>
+  </div>
+
+  <div class='form__control'>
+    <label>
+      Ratio
+      <input min='0.1' step='0.1' max='0.9' type="number" [(ngModel)]='freeToBlockedRatio'>
+    </label>
+  </div>
+
+  <button class='button' (click)='mapGenClicked()'>Generate</button>
+</div>
+
+<div class='map' [innerHTML]='selectedMap | map'></div>
+
+<div>
+  <button class='button' (click)='copyToClipboard()'>Copy to clipboard</button>
+</div>
+
+<div class='maps'>
+  <h3 class='maps__header'>Generated Maps</h3>
+  <ul class='maps__list'>
+    <li *ngFor='let map of maps' (click)='selectMap(map)' [class.maps__list-item--selected]='map === selectedMap' class='maps__list-item'>
+      {{map.time}} - ({{map.size.width}} x {{map.size.height}}, {{map.ratio}})
+    </li>
+  </ul>
+</div>

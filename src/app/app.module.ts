@@ -1,16 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { MapPipe } from './map.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapPipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [MapPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
