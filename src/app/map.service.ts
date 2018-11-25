@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 export enum MapTile {
   Free = '_',
-  Blocked = '∗',
+  Blocked = '*',
   Player = 'X',
   Goal = 'R',
 }
